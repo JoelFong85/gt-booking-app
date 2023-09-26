@@ -1,0 +1,14 @@
+<h1>BOOK YOUR ROOM!<h1/>
+
+<div class="row mt-4">
+    <h3>Select a date</h3>
+    <div>
+        <%= form_for(@room, url: main_search_room_path) do |r| %>
+                
+            <%= r.date_field :select_a_date, min: Date.today + 1 %>
+
+            <%= r.submit 'Choose Date' %>
+
+        <% end %>
+    </div>
+</div>

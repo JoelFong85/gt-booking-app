@@ -1,6 +1,11 @@
 class MainController < ApplicationController
 
-    def index        
-    end
+    def landing_page
+        @room = Room.new
+    end #landing_page
+
+    def search_room
+
+    end #search_room
 
 end
