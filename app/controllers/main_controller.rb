@@ -1,4 +1,5 @@
 class MainController < ApplicationController
+    include BookingHelper
 
     def landing_page
         @room = Room.new
@@ -39,8 +40,38 @@ class MainController < ApplicationController
 
 
     def make_booking
-        
-        Rails.logger.debug("XXXXX1")
+
+        slot = params[:slot] if params[:slot]
+        slot_id = slot[:slot_id]
+        selected_date = slot[:selected_date]
+        room_id = slot[:room_id]
+    
+        if if_booking_exists(slot_id, selected_date, room_id)        
+            # Rails.logger.debug("XXXXX1a")
+            respond_to do |format|
+                format.turbo_stream do
+                    render turbo_stream: turbo_stream.update("booking_message", "Booked exists, please select another slot.")
+                end
+            end
+    
+        else
+            # Rails.logger.debug("XXXXX1b")
+            make_new_booking
+            if @slot_booked.valid?
+                respond_to do |format|
+                    format.turbo_stream do
+                        render turbo_stream: turbo_stream.update("booking_message", "Booking saved successfully!")
+                    end
+                end
+            else
+                respond_to do |format|
+                    format.turbo_stream do
+                        render turbo_stream: turbo_stream.update("booking_message", "#{@slot_booked.errors.full_messages.first}")
+                    end
+                end
+            end
+    
+        end
 
     end #make_booking
 

@@ -14,7 +14,7 @@
                     <tr>
                         <td><%= sl.time %></td>
                         <td><%= booked_by_user(selected_date, sl, room.id) %></td>
-                        <td><%= form.radio_button :slot_id, sl.id , id: "radio_hit_#{index = index + 1}" %></td>
+                        <td><%= form.radio_button :slot_id, sl.id , id: "radio_hit_#{index = index + 1}" , :disabled => if_already_booked(sl, selected_date, room.id) %></td>
                     </tr>
                 <% end %>
             </table>
