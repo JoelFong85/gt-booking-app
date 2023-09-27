@@ -2,13 +2,11 @@
 
 <div class="row mt-4">
     <h3>Select a date</h3>
-    <div>
-        <%= form_for(@room, url: main_search_room_path) do |r| %>
-                
-            <%= r.date_field :select_a_date, min: Date.today + 1 %>
 
-            <%= r.submit 'Choose Date' %>
+    <%= render partial: "main/select_date",  locals: {room: @room}%>
 
-        <% end %>
+    <div id="select_room">
+        <%= render partial: "main/select_room", locals: {selected_date: @selected_date, room: @room } %>
     </div>
+
 </div>

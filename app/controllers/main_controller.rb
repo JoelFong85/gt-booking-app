@@ -4,8 +4,23 @@ class MainController < ApplicationController
         @room = Room.new
     end #landing_page
 
-    def search_room
+    def select_room
+                
+        @selected_date = params[:room][:select_a_date] if params[:room][:select_a_date].present?
+                
+        @room = Room.new
 
-    end #search_room
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.update("select_room", partial: "main/select_room",        
+            locals: {selected_date: @selected_date, room: @room})
+          end
+        end
+
+    end #select_room
+
+    def get_room_slots
+        Rails.logger.debug("XXXXX1")
+    end #get_room_slots
 
 end

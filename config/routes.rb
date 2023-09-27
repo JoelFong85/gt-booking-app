@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   root to:"main#landing_page"
 
-  post 'main/search_room'
+  post 'main/select_room'
+  post 'main/get_room_slots'
   
 end
