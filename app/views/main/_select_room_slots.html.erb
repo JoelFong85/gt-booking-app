@@ -1,0 +1,41 @@
+<% if selected_date.present? && (room.present? && slots.present?) %>
+    <div class="mt-4">
+        <p>Only allowed to book 1 hour slots. Meetings longer than 1 hour might be an inefficient use of time.</p>
+    </div>
+    <div class="mt-4">
+        <%= form_for(slot, url: main_make_booking_path) do |form| %>
+            <table class="table table-striped">
+                <tr>
+                    <th>Start Time</th>
+                    <th>Booked by</th>
+                    <th>Select</th>
+                </tr>
+                <% slots.each_with_index do |sl, index| %>
+                    <tr>
+                        <td><%= sl.time %></td>
+                        <td><%= booked_by_user(selected_date, sl, room.id) %></td>
+                        <td><%= form.radio_button :slot_id, sl.id , id: "radio_hit_#{index = index + 1}" %></td>
+                    </tr>
+                <% end %>
+            </table>
+
+            <div class="mt-4">
+                <%= form.label :name %>
+                <%= form.text_field :name, required: true %>
+            </div>
+
+            <div class="mt-4">
+                <%= form.label :email %>
+                <%= form.text_field :email, required: true %>
+            </div>
+
+            <%= form.hidden_field :selected_date, value: selected_date %>
+            <%= form.hidden_field :room_id, value: room.id %>
+
+            <div class="mt-4">
+                <%= form.submit "Book Now" %>
+            </div>
+
+        <% end %>
+    </div>
+<% end %>

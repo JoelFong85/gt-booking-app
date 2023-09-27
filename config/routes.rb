@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to:"main#landing_page"
 
   post 'main/select_room'
-  post 'main/get_room_slots'
+  post 'main/select_room_slots'
+  post 'main/make_booking'
   
 end

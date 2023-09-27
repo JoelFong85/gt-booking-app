@@ -3,7 +3,7 @@
 
         <%= r.date_field :select_a_date, min: Date.today + 1, value: (Date.current + 1.day).to_s %>
 
-        <%= r.submit 'Choose Date' %>
+        <%= r.submit 'Choose Date', class: 'btn btn-primary' %>
 
     <% end %>
 </div>

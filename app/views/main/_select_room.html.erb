@@ -4,11 +4,12 @@
 
     <h3>Select a room</h3>
 
-    <%= form_for(room, url: main_get_room_slots_path) do |r| %>        
+    <div class="mt-1"></div>
+    <%= form_for(room, url: main_select_room_slots_path) do |r| %>        
         
         <%= r.select :name, get_room_list %>
-        <%= r.hidden_field :date, :value => selected_date %>
-        <%= r.submit 'Check room slots' %>
+        <%= r.hidden_field :selected_date, :value => selected_date %>
+        <%= r.submit 'Check room slots', class: 'btn btn-primary' %>
         </span>
     <% end %>
 
