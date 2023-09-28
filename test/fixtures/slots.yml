@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+proper_slot:
+  time: '0900 - 1000'
+  status: true
+  room_id: <%= Room.last.id %>
+
+two:
+  time: MyString
+  status: false
+  room_id: 1

@@ -46,8 +46,7 @@ class MainController < ApplicationController
         selected_date = slot[:selected_date]
         room_id = slot[:room_id]
     
-        if if_booking_exists(slot_id, selected_date, room_id)        
-            # Rails.logger.debug("XXXXX1a")
+        if if_booking_exists(slot_id, selected_date, room_id)                    
             respond_to do |format|
                 format.turbo_stream do
                     render turbo_stream: turbo_stream.update("booking_message", "Booked exists, please select another slot.")
@@ -55,8 +54,7 @@ class MainController < ApplicationController
             end
     
         else
-            # Rails.logger.debug("XXXXX1b")
-            make_new_booking
+            make_new_booking(slot)
             if @slot_booked.valid?
                 respond_to do |format|
                     format.turbo_stream do

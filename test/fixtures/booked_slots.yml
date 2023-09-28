@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+proper_booked_slot:
+  slot_id: <%= Slot.last.id %>
+  name: 'Tester Testing'
+  email: 'test@test.com'
+  on_date: 2023-09-26
+  room_id: <%= Room.last.id %>
+
+no_email_booked_slot:
+  slot_id: <%= Slot.last.id %>
+  name: 'Tester Testing'
+  email: ''
+  on_date: 2023-09-26
+  room_id: <%= Room.last.id %>
