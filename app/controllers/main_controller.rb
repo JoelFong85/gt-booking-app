@@ -31,7 +31,7 @@ class MainController < ApplicationController
         
         respond_to do |format|
           format.turbo_stream do
-            render turbo_stream: turbo_stream.append("select_room_slots", partial: "main/select_room_slots",
+            render turbo_stream: turbo_stream.update("select_room_slots", partial: "main/select_room_slots",
             locals: {selected_date: @selected_date, room: @room, slots: @slots, slot: @slot })
           end
         end
