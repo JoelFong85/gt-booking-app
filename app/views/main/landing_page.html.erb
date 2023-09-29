@@ -13,6 +13,8 @@
         <%= render partial: "main/select_room_slots", locals: {selected_date: @selected_date, room: @room, slots: @slots, slot: @slot } %>
     </div>
 
-    <div id ="booking_message"></div>
+    <div id ="booking_message">
+        <%= render partial: "main/booking_response", locals: {booking_response_text: @booking_response_text, booking_response_text_class: @booking_response_text_class } %>
+    </div>
 
 </div>

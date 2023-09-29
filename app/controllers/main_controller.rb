@@ -45,31 +45,27 @@ class MainController < ApplicationController
         slot_id = slot[:slot_id]
         selected_date = slot[:selected_date]
         room_id = slot[:room_id]
-    
-        if if_booking_exists(slot_id, selected_date, room_id)                    
-            respond_to do |format|
-                format.turbo_stream do
-                    render turbo_stream: turbo_stream.update("booking_message", "Booked exists, please select another slot.")
-                end
-            end
-    
-        else
+
+        if if_booking_exists(slot_id, selected_date, room_id) 
+            @booking_response_text = "Booking exists, please select another slot."
+            @booking_response_text_class = "message_error"
+        else    
             make_new_booking(slot)
             if @slot_booked.valid?
-                respond_to do |format|
-                    format.turbo_stream do
-                        render turbo_stream: turbo_stream.update("booking_message", "Booking saved successfully!")
-                    end
-                end
+                @booking_response_text = "Booking saved successfully!"
+                @booking_response_text_class = "message_success"
             else
-                respond_to do |format|
-                    format.turbo_stream do
-                        render turbo_stream: turbo_stream.update("booking_message", "#{@slot_booked.errors.full_messages.first}")
-                    end
-                end
+                @booking_response_text = "Error in booking : #{@slot_booked.errors.full_messages.first}"
+                @booking_response_text_class = "message_error"
             end
-    
         end
+
+        respond_to do |format|
+            format.turbo_stream do
+                render turbo_stream: turbo_stream.update("booking_message", partial: "main/booking_response",
+                locals: {booking_response_text: @booking_response_text, booking_response_text_class: @booking_response_text_class})
+            end
+        end     
 
     end #make_booking
 
